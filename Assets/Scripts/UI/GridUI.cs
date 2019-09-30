@@ -13,4 +13,12 @@ public class GridUI : MonoBehaviour {
         grid.algorithms[(int)grid.currentAlgorithm].Invoke(grid);
     }
 
+    public void IncreaseGrid() {
+        gridManager.ResizeGrid(1);
+    }
+
+    public void DecreaseGrid() {
+        gridManager.ResizeGrid(-1);
+    }
+
 }

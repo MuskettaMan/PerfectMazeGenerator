@@ -17,8 +17,22 @@ public class GridGraphic : MonoBehaviour {
 
     private void Start() {
         grid = gridManager.grid;
+
+        Resize();
+    }
+
+    public void Resize() {
+        grid = gridManager.grid;
         gridSize = gridManager.GridSize;
-        
+
+        if (objects != null) {
+            for (int i = 0; i < objects.GetLength(0); i++) {
+                for (int j = 0; j < objects.GetLength(1); j++) {
+                    Destroy(objects[i, j].gameObject);
+                }
+            }
+        }
+
         objects = new CellGraphic[gridSize.x, gridSize.y];
 
         for (int i = 0; i < grid.width; i++) {

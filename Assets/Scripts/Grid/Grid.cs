@@ -44,6 +44,21 @@ public class Grid {
         algorithms[(int)currentAlgorithm].Invoke(this);
     }
 
+    public void ResizeGrid(int width, int height) {
+        this.width = width;
+        this.height = height;
+
+        grid = new Cell[width, height];
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                grid[x, y] = new Cell(x, y);
+            }
+        }
+
+        algorithms[(int)currentAlgorithm].Invoke(this);
+    }
+
     public bool IsInside(int x, int y) {
         return x >= 0 && x < width && y >= 0 && y < height;
     }
