@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour {
 
     private float targetSize;
     [SerializeField] private float speed = 5f;
+    [SerializeField] private float padding = 1f;
 
     private void Start() {
         camera = GetComponent<Camera>();
@@ -26,6 +27,7 @@ public class CameraController : MonoBehaviour {
     private void SetCameraSize() {
         targetSize = (float)gridManager.GridSize.y / 2;
         targetSize += gridGraphic.GetPadding() * gridManager.GridSize.y / 2;
+        targetSize += padding;
     }
 
     private void OnGridResized(int amount) {

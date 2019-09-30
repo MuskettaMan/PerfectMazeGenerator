@@ -106,7 +106,7 @@ MonoBehaviour:
     type: 3}
   verticalWall: {fileID: 7575905498371596563, guid: e344a2b841c230948ac275a28d35e822,
     type: 3}
-  visitedColor: {r: 0.8018868, g: 0.26099145, b: 0.59807587, a: 1}
+  visitedColor: {r: 0, g: 1, b: 1, a: 1}
   notVisitedColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1001 &516146761686953591
 PrefabInstance:
