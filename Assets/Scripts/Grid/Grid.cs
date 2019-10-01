@@ -17,7 +17,7 @@ public class Grid {
     /// </summary>
     public Cell[,] grid { get; private set; }
 
-    public DepthFirst depthFirst { get; private set; }
+    public MazeUtil depthFirst { get; private set; }
     public MazeAlgorithm[] algorithms { get; private set; }
     public MazeType currentAlgorithm;
 
@@ -39,7 +39,7 @@ public class Grid {
             }
         }
 
-        algorithms = new MazeAlgorithm[] { DepthFirst.GeneratePrim };
+        algorithms = new MazeAlgorithm[] { MazeUtil.GenerateDepthFirst };
 
         algorithms[(int)currentAlgorithm].Invoke(this);
     }
@@ -76,7 +76,7 @@ public class Grid {
     /// <returns></returns>
     public Cell GetRandomNeighbor(Cell cell) {
 
-        var neighbors = GetAllNeighbors(cell, false);
+        var neighbors = GetAllUnvisitedNeighbors(cell);
         
         // If there are any neighbors, return a random one
         if (neighbors.Length > 0) {
@@ -89,7 +89,7 @@ public class Grid {
         
     }
 
-    public Cell[] GetAllNeighbors(Cell cell, bool visited) {
+    public Cell[] GetAllNeighbors(Cell cell) {
         // List to store the neighbors
         List<Cell> neighbors = new List<Cell>();
 
@@ -101,34 +101,34 @@ public class Grid {
         //(!GetNeighbor(top).visited || !visited)
         // Check if the neighbor isn't null and hasn't been visited yet and then add it to list
         if (GetNeighbor(top) != null) {
-            if (!visited)
-                neighbors.Add(GetNeighbor(top));
-            else if (!GetNeighbor(top).visited)
-                neighbors.Add(GetNeighbor(top));
+            neighbors.Add(GetNeighbor(top));
         }
 
         if (GetNeighbor(bottom) != null) {
-            if (!visited)
-                neighbors.Add(GetNeighbor(bottom));
-            else if (!GetNeighbor(bottom).visited)
-                neighbors.Add(GetNeighbor(bottom));
+            neighbors.Add(GetNeighbor(bottom));
         }
 
         if (GetNeighbor(right) != null) {
-            if (!visited)
-                neighbors.Add(GetNeighbor(right));
-            else if (!GetNeighbor(right).visited)
-                neighbors.Add(GetNeighbor(right));
+            neighbors.Add(GetNeighbor(right));
         }
 
         if (GetNeighbor(left) != null) {
-            if (!visited)
-                neighbors.Add(GetNeighbor(left));
-            else if (!GetNeighbor(left).visited)
-                neighbors.Add(GetNeighbor(left));
+            neighbors.Add(GetNeighbor(left));
         }
 
         return neighbors.ToArray();
+    }
+
+    public Cell[] GetAllUnvisitedNeighbors(Cell cell) {
+        var neighbors = GetAllNeighbors(cell);
+        List<Cell> newNeighbors = new List<Cell>();
+        for (int i = 0; i < neighbors.Length; i++) {
+            if (!neighbors[i].visited) {
+                newNeighbors.Add(neighbors[i]);
+            }
+        }
+
+        return newNeighbors.ToArray();
     }
 
     public void Reset() {

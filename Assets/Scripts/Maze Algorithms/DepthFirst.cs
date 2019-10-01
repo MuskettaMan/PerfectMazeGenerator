@@ -2,7 +2,7 @@
 using UnityEngine;
 using System.Linq;
 
-public class DepthFirst {
+public class MazeUtil {
 
     public static Grid GenerateDepthFirst(Grid grid) {
         Cell current = grid.grid[0, 0];

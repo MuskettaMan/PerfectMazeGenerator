@@ -24,7 +24,7 @@ public class GridManager : MonoBehaviour {
         get; private set;
     }
 
-    public DepthFirst depthFirst {
+    public MazeUtil depthFirst {
         get; private set;
     }
 
