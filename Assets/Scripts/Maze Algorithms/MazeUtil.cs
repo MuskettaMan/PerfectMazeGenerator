@@ -29,8 +29,29 @@ public class MazeUtil {
     }
 
     public static Grid GeneratePrim(Grid grid) {
-
         
+        Cell startCell = grid.grid[0, 0];
+        HashSet<Cell> pathSet = new HashSet<Cell>();
+        pathSet.Add(startCell);
+
+        while (pathSet.Count > 0) {
+            int r = Random.Range(0, pathSet.Count);
+            var cell = pathSet.ElementAt(r);
+            pathSet.Remove(cell);
+            cell.visited = true;
+
+            var neighbors = grid.GetAllVisitedNeighbors(cell);
+            if (neighbors.Length > 0) {
+                int rand = Random.Range(0, neighbors.Length);
+                grid.RemoveWalls(cell, neighbors[rand]); 
+            }
+
+            var unvisitedNeighbors = grid.GetAllUnvisitedNeighbors(cell);
+            for (int i = 0; i < unvisitedNeighbors.Length; i++) {
+                pathSet.Add(unvisitedNeighbors[i]);
+            }
+
+        }
 
         return grid;
     }

@@ -30,7 +30,7 @@ public class GridManager : MonoBehaviour {
 
     private void Start() {
         grid = new Grid(gridSize.x, gridSize.y, MazeType.DepthFirst);
-        depthFirst = grid.depthFirst;
+        depthFirst = grid.mazeUtil;
     }
 
     public void ResizeGrid(int amount) {

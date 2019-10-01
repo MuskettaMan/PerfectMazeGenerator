@@ -30,6 +30,9 @@
 
     }
 
+    /// <summary>
+    /// Reset the cell. Marks unvisited and sets the walls to true
+    /// </summary>
     public void Reset() {
         visited = false;
         walls = new bool[] { true, true, true, true };
@@ -37,6 +40,9 @@
 
 }
 
+/// <summary>
+/// Naming for the different sides of walls
+/// </summary>
 public enum Wall {
     Top,
     Bottom,
