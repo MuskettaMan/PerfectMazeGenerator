@@ -39,9 +39,15 @@ public class Grid {
             }
         }
 
-        algorithms = new MazeAlgorithm[] { DepthFirst.GenerateMaze };
+        algorithms = new MazeAlgorithm[] { DepthFirst.GeneratePrim };
 
         algorithms[(int)currentAlgorithm].Invoke(this);
+    }
+
+    public Cell GetRandomCell() {
+        Cell cell = grid[Random.Range(0, width), Random.Range(0, height)];
+
+        return cell;
     }
 
     public void ResizeGrid(int width, int height) {
@@ -70,6 +76,20 @@ public class Grid {
     /// <returns></returns>
     public Cell GetRandomNeighbor(Cell cell) {
 
+        var neighbors = GetAllNeighbors(cell, false);
+        
+        // If there are any neighbors, return a random one
+        if (neighbors.Length > 0) {
+            int r = Mathf.FloorToInt(Random.Range(0, neighbors.Length));
+            return neighbors[r];
+        } else {
+            // else return nothing
+            return null;
+        }
+        
+    }
+
+    public Cell[] GetAllNeighbors(Cell cell, bool visited) {
         // List to store the neighbors
         List<Cell> neighbors = new List<Cell>();
 
@@ -78,29 +98,37 @@ public class Grid {
         var bottom = new Vector2Int(cell.x, cell.y - 1);
         var right = new Vector2Int(cell.x + 1, cell.y);
         var left = new Vector2Int(cell.x - 1, cell.y);
-
+        //(!GetNeighbor(top).visited || !visited)
         // Check if the neighbor isn't null and hasn't been visited yet and then add it to list
-        if (GetNeighbor(top) != null && !GetNeighbor(top).visited)
-            neighbors.Add(GetNeighbor(top));
-
-        if (GetNeighbor(bottom) != null && !GetNeighbor(bottom).visited)
-            neighbors.Add(GetNeighbor(bottom));
-
-        if (GetNeighbor(right) != null && !GetNeighbor(right).visited)
-            neighbors.Add(GetNeighbor(right));
-
-        if (GetNeighbor(left) != null && !GetNeighbor(left).visited)
-            neighbors.Add(GetNeighbor(left));
-
-        // If there are any neighbors, return a random one
-        if (neighbors.Count > 0) {
-            int r = Mathf.FloorToInt(Random.Range(0, neighbors.Count));
-            return neighbors[r];
-        } else {
-            // else return nothing
-            return null;
+        if (GetNeighbor(top) != null) {
+            if (!visited)
+                neighbors.Add(GetNeighbor(top));
+            else if (!GetNeighbor(top).visited)
+                neighbors.Add(GetNeighbor(top));
         }
-        
+
+        if (GetNeighbor(bottom) != null) {
+            if (!visited)
+                neighbors.Add(GetNeighbor(bottom));
+            else if (!GetNeighbor(bottom).visited)
+                neighbors.Add(GetNeighbor(bottom));
+        }
+
+        if (GetNeighbor(right) != null) {
+            if (!visited)
+                neighbors.Add(GetNeighbor(right));
+            else if (!GetNeighbor(right).visited)
+                neighbors.Add(GetNeighbor(right));
+        }
+
+        if (GetNeighbor(left) != null) {
+            if (!visited)
+                neighbors.Add(GetNeighbor(left));
+            else if (!GetNeighbor(left).visited)
+                neighbors.Add(GetNeighbor(left));
+        }
+
+        return neighbors.ToArray();
     }
 
     public void Reset() {
@@ -118,6 +146,22 @@ public class Grid {
         }
 
         return null;
+    }
+
+    public void MarkAllCellsAsVisited() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                grid[i, j].visited = true;
+            }
+        }
+    }
+
+    public void MarkAllCellsAsUnVisited() {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
+                grid[i, j].visited = false;
+            }
+        }
     }
 
     public void RemoveWalls(Cell a, Cell b) {

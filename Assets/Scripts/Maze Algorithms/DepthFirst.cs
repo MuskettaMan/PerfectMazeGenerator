@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
-using System;
+using UnityEngine;
+using System.Linq;
 
 public class DepthFirst {
 
-    public static Grid GenerateMaze(Grid grid) {
+    public static Grid GenerateDepthFirst(Grid grid) {
         Cell current = grid.grid[0, 0];
         Stack<Cell> stack = new Stack<Cell>();
         do {
@@ -23,6 +24,13 @@ public class DepthFirst {
                 current = stack.Pop();
             }
         } while (stack.Count > 0);
+
+        return grid;
+    }
+
+    public static Grid GeneratePrim(Grid grid) {
+
+        
 
         return grid;
     }
