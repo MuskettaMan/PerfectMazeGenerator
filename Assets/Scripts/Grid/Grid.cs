@@ -50,7 +50,7 @@ public class Grid {
             }
         }
 
-        algorithms = new MazeAlgorithm[] { MazeUtil.GeneratePrim };
+        algorithms = new MazeAlgorithm[] { MazeUtil.GenerateDepthFirst, MazeUtil.GeneratePrim };
 
         algorithms[(int)currentAlgorithm].Invoke(this);
     }

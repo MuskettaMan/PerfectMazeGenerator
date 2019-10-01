@@ -19,6 +19,7 @@ public class GridManager : MonoBehaviour {
     public Action<int> resizedGrid;
 
     [SerializeField] private GridGraphic gridGraphic;
+    [SerializeField] private int maxGridSize = 40;
 
     public Grid grid {
         get; private set;
@@ -33,8 +34,18 @@ public class GridManager : MonoBehaviour {
         depthFirst = grid.mazeUtil;
     }
 
+    public void SetMazeType(MazeType type) {
+        grid.currentAlgorithm = type;
+        Reset();
+    }
+
+    public void Reset() {
+        grid.Reset();
+        grid.algorithms[(int)grid.currentAlgorithm].Invoke(grid);
+    }
+
     public void ResizeGrid(int amount) {
-        if (gridSize.x + amount < 2 || gridSize.y + amount < 2 || gridSize.x + amount > 20 || gridSize.y + amount > 20) {
+        if (gridSize.x + amount < 2 || gridSize.y + amount < 2 || gridSize.x + amount > maxGridSize || gridSize.y + amount > maxGridSize) {
             return;
         }
 
