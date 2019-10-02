@@ -126,13 +126,18 @@ public class MazeUtil {
 
             if (bucketCells[edge.first] != bucketCells[edge.second]) {
                 grid.RemoveWalls(edge.first, edge.second);
-                int id = bucketCells[edge.second];
-                //bucketCells[edge.second] = bucketCells[edge.first];
 
+                int id = bucketCells[edge.first];
+
+                List<Cell> duplicates = new List<Cell>(); // Breakpoint this and see how many times the loops go off
                 foreach (var kvp in bucketCells) {
-                    if (kvp.Value == id) {
-                        bucketCells[kvp.Key] = id;
+                    if (kvp.Value == bucketCells[edge.second]) {
+                        duplicates.Add(kvp.Key);
                     }
+                }
+
+                foreach (var cell in duplicates) {
+                    bucketCells[cell] = id;
                 }
             } 
         }

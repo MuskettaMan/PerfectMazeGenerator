@@ -4,5 +4,6 @@ public enum MazeType {
     DepthFirst,
     Prims,
     BinaryTree,
-    SideWinder
+    SideWinder,
+    Kruskal
 }

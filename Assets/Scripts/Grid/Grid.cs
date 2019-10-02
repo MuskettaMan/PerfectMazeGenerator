@@ -47,10 +47,11 @@ public class Grid {
         ComputeCells();
 
         algorithms = new MazeAlgorithm[] {
-            MazeUtil.GenerateKruskal,
+            MazeUtil.GenerateDepthFirst,
             MazeUtil.GeneratePrim,
             MazeUtil.GenerateBinaryTree,
-            MazeUtil.GenerateSideWinder
+            MazeUtil.GenerateSideWinder,
+            MazeUtil.GenerateKruskal
         };
 
         algorithms[(int)currentAlgorithm].Invoke(this);
