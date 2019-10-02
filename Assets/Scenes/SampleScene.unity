@@ -1330,7 +1330,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -18, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1059186289
 MonoBehaviour:
@@ -1552,7 +1552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235d30a99df1ccc45834d46a8e55c72f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridSize: {x: 9, y: 9}
+  gridSize: {x: 3, y: 3}
   gridGraphic: {fileID: 1269231044}
   maxGridSize: 40
 --- !u!1 &1280480911
@@ -2326,7 +2326,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 2}
-  m_SizeDelta: {x: 0, y: 150}
+  m_SizeDelta: {x: 0, y: 394.3}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1784084572
 MonoBehaviour:
@@ -2486,6 +2486,10 @@ MonoBehaviour:
     - m_Text: Depth-First Search
       m_Image: {fileID: 0}
     - m_Text: Prim's Algorithm
+      m_Image: {fileID: 0}
+    - m_Text: Binary Tree
+      m_Image: {fileID: 0}
+    - m_Text: Side Winder
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:

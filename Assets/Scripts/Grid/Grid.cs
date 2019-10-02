@@ -44,13 +44,14 @@ public class Grid {
 
         grid = new Cell[width, height];
 
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                grid[x, y] = new Cell(x, y);
-            }
-        }
+        ComputeCells();
 
-        algorithms = new MazeAlgorithm[] { MazeUtil.GenerateDepthFirst, MazeUtil.GeneratePrim };
+        algorithms = new MazeAlgorithm[] {
+            MazeUtil.GenerateKruskal,
+            MazeUtil.GeneratePrim,
+            MazeUtil.GenerateBinaryTree,
+            MazeUtil.GenerateSideWinder
+        };
 
         algorithms[(int)currentAlgorithm].Invoke(this);
     }
@@ -76,13 +77,60 @@ public class Grid {
 
         grid = new Cell[width, height];
 
+        ComputeCells();
+
+        algorithms[(int)currentAlgorithm].Invoke(this);
+    }
+
+    private void ComputeCells() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                grid[x, y] = new Cell(x, y);
+                Wall top = null;
+                Wall bottom = null;
+                Wall right = null;
+                Wall left = null;
+
+                grid[x, y] = new Cell(x, y, top, bottom, right, left);
             }
         }
 
-        algorithms[(int)currentAlgorithm].Invoke(this);
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+
+                Wall top = null;
+                Wall bottom = null;
+                Wall right = null;
+                Wall left = null;
+
+                if (x == 0) {
+                    left = new Wall(true, null, grid[x, y]);
+                    right = new Wall(true, grid[x, y], grid[x + 1, y]);
+                } else if (x == width - 1) {
+                    right = new Wall(true, grid[x, y], null);
+                    left = grid[x - 1, y].walls[(int)Walls.Right];
+                } else if (x > 0) {
+                    left = grid[x - 1, y].walls[(int)Walls.Right];
+                    right = new Wall(true, grid[x, y], grid[x + 1, y]);
+                }
+
+                if (y == 0) {
+                    bottom = new Wall(true, null, grid[x, y]);
+                    top = new Wall(true, grid[x, y], grid[x, y + 1]);
+                } else if (y == height - 1) {
+                    top = new Wall(true, grid[x, y], null);
+                    bottom = grid[x, y - 1].walls[(int)Walls.Top];
+                } else if (y > 0) {
+                    bottom = grid[x, y - 1].walls[(int)Walls.Top];
+                    top = new Wall(true, grid[x, y], grid[x, y + 1]);
+                }
+
+                grid[x, y].walls[(int)Walls.Top] = top;
+                grid[x, y].walls[(int)Walls.Bottom] = bottom;
+                grid[x, y].walls[(int)Walls.Right] = right;
+                grid[x, y].walls[(int)Walls.Left] = left;
+
+            }
+        }
     }
 
     /// <summary>
@@ -240,21 +288,25 @@ public class Grid {
 
         var x = a.x - b.x;
         if (x == 1) {
-            a.walls[(int)Wall.Left] = false;
-            b.walls[(int)Wall.Right] = false;
+            a.walls[(int)Walls.Left].enabled = false;
         } else if (x == -1) {
-            a.walls[(int)Wall.Right] = false;
-            b.walls[(int)Wall.Left] = false;
+            a.walls[(int)Walls.Right].enabled = false;
         }
 
         var y = a.y - b.y;
         if (y == 1) {
-            a.walls[(int)Wall.Bottom] = false;
-            b.walls[(int)Wall.Top] = false;
+            a.walls[(int)Walls.Bottom].enabled = false;
         } else if (y == -1) {
-            a.walls[(int)Wall.Top] = false;
-            b.walls[(int)Wall.Bottom] = false;
+            a.walls[(int)Walls.Top].enabled = false;
         }
+    }
+
+    /// <summary>
+    /// Remove a wall
+    /// </summary>
+    /// <param name="wall">Wall you want to remove</param>
+    public void RemoveWall(Wall wall) {
+        wall.enabled = false;
     }
 
 }

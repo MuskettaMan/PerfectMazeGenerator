@@ -26,7 +26,7 @@ public class CellGraphic : MonoBehaviour {
     private void Update() {
 
         for (int i = 0; i < cell.walls.Length; i++) {
-            walls[i].gameObject.SetActive(cell.walls[i]);
+            walls[i].gameObject.SetActive(cell.walls[i].enabled);
         }
     }
     

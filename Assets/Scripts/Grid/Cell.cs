@@ -14,19 +14,19 @@
     /// </summary>
     public bool visited;
 
-    public bool[] walls;
+    public Wall[] walls;
 
     /// <summary>
     /// Constructor for the cell, sets the positions and marks it unvisited
     /// </summary>
     /// <param name="x">The x position of the cell</param>
     /// <param name="y">The y position of the cell</param>
-    public Cell(int x, int y) {
+    public Cell(int x, int y, Wall top, Wall bottom, Wall right, Wall left) {
         this.x = x;
         this.y = y;
 
         visited = false;
-        walls = new bool[] { true, true, true, true };
+        walls = new Wall[] { top, bottom, right, left };
 
     }
 
@@ -35,7 +35,9 @@
     /// </summary>
     public void Reset() {
         visited = false;
-        walls = new bool[] { true, true, true, true };
+        for (int i = 0; i < walls.Length; i++) {
+            walls[i].enabled = true;
+        }
     }
 
 }
@@ -43,7 +45,7 @@
 /// <summary>
 /// Naming for the different sides of walls
 /// </summary>
-public enum Wall {
+public enum Walls {
     Top,
     Bottom,
     Right,
