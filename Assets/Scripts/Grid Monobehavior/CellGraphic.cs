@@ -7,7 +7,8 @@ public class CellGraphic : MonoBehaviour {
     public Cell cell;
 
     [SerializeField] private Transform[] walls;
-    [SerializeField] private Sprite[] sprites;
+    [SerializeField] private Sprite[] backgroundSprites;
+    [SerializeField] private Sprite[] wallSprites;
 
     /// <summary>
     /// SpriteRenderer for the walls
@@ -20,7 +21,11 @@ public class CellGraphic : MonoBehaviour {
     private void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        spriteRenderer.sprite = sprites[Random.Range(0, sprites.Length)];
+        foreach (Transform wall in walls) {
+            wall.GetComponent<SpriteRenderer>().sprite = wallSprites[Random.Range(0, wallSprites.Length)];
+        }
+
+        spriteRenderer.sprite = backgroundSprites[Random.Range(0, backgroundSprites.Length)];
     }
 
     private void Update() {
