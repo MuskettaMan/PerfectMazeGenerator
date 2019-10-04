@@ -18,13 +18,17 @@ public class GridGraphic : MonoBehaviour {
     private void Start() {
         grid = gridManager.grid;
 
-        Resize();
+        Display();
     }
 
-    public void Resize() {
+    /// <summary>
+    /// Display the grid
+    /// </summary>
+    public void Display() {
         grid = gridManager.grid;
         gridSize = gridManager.GridSize;
 
+        /// Remove all past objects
         if (objects != null) {
             for (int i = 0; i < objects.GetLength(0); i++) {
                 for (int j = 0; j < objects.GetLength(1); j++) {
@@ -62,6 +66,7 @@ public class GridGraphic : MonoBehaviour {
                 pos.x *= padding + 1;
                 pos.y *= padding + 1;
 
+                // Instantiate the cells
                 CellGraphic clone = Instantiate(cellGraphicPrefab, new Vector2(pos.x, pos.y), Quaternion.identity, transform);
                 clone.name = "Cell: " + grid.grid[i, j].x + " - " + grid.grid[i, j].y;
                 clone.cell = grid.grid[i, j];
@@ -70,8 +75,20 @@ public class GridGraphic : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Get the padding
+    /// </summary>
+    /// <returns>The padding that separates the cells</returns>
     public float GetPadding() {
         return padding;
+    }
+
+    /// <summary>
+    /// Get all the cell graphics
+    /// </summary>
+    /// <returns>All the cell graphics</returns>
+    public CellGraphic[,] GetCells() {
+        return objects;
     }
 
 }

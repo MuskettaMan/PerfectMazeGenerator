@@ -11,21 +11,40 @@ public class PlayerController : MonoBehaviour {
     [SerializeField] private string verticalAxisName;
     [SerializeField] private float movementSpeed = 1;
 
+    /// <summary>
+    /// The direction the player is going
+    /// </summary>
+    private Vector2 dir;
+
+    /// <summary>
+    /// Set dependencies
+    /// </summary>
     private void Start() {
         rigidbody2D = GetComponent<Rigidbody2D>();
     }
 
+    /// <summary>
+    /// Get the inputs and make direction out of it, normalize it and apply it to the position;
+    /// </summary>
     private void Update() {
-        Vector2 move = new Vector2();
-        move.x = Input.GetAxis(horizontalAxisName);
-        move.y = Input.GetAxis(verticalAxisName);
+        dir = new Vector2();
+        dir.x = Input.GetAxisRaw(horizontalAxisName);
+        dir.y = Input.GetAxisRaw(verticalAxisName);
 
-        move.x = Mathf.Ceil(move.x);
-        move.y = Mathf.Ceil(move.y);
+        dir.Normalize();   
 
-        move.Normalize();   
+        rigidbody2D.position += dir * Time.deltaTime * movementSpeed;
+    }
 
-        rigidbody2D.position += move * Time.deltaTime * movementSpeed;
+    /// <summary>
+    /// Get the player's current direction
+    /// </summary>
+    /// <returns>The player's current direction</returns>
+    public Vector2 GetDirection() {
+        dir.x = Mathf.Round(dir.x);
+        dir.y = Mathf.Round(dir.y);
+
+        return dir;
     }
 
 }

@@ -4,6 +4,11 @@ using System.Linq;
 
 public class MazeUtil {
 
+    /// <summary>
+    /// Generate a maze with the depth first algorithm
+    /// </summary>
+    /// <param name="grid">The grid you want to generate the maze on</param>
+    /// <returns>The grid with the maze on it</returns>
     public static Grid GenerateDepthFirst(Grid grid) {
         Cell current = grid.grid[0, 0];
         Stack<Cell> stack = new Stack<Cell>();
@@ -28,6 +33,11 @@ public class MazeUtil {
         return grid;
     }
 
+    /// <summary>
+    /// Generate a maze with Prim's algorithm
+    /// </summary>
+    /// <param name="grid">The grid you want to generate the maze on</param>
+    /// <returns>The grid with the maze on it</returns>
     public static Grid GeneratePrim(Grid grid) {
         
         Cell startCell = grid.grid[0, 0];
@@ -56,6 +66,11 @@ public class MazeUtil {
         return grid;
     }
 
+    /// <summary>
+    /// Generate a maze with the binary tree algorithm
+    /// </summary>
+    /// <param name="grid">The grid you want to generate the maze on</param>
+    /// <returns>The grid with the maze on it</returns>
     public static Grid GenerateBinaryTree(Grid grid) {
 
         List<Cell> neighbors = new List<Cell>();
@@ -83,6 +98,11 @@ public class MazeUtil {
         return grid;
     }
 
+    /// <summary>
+    /// Generate a maze with the sidewinder algorithm
+    /// </summary>
+    /// <param name="grid">The grid you want to generate the maze on</param>
+    /// <returns>The grid with the maze on it</returns>
     public static Grid GenerateSideWinder(Grid grid) {
         for (int x = 0; x + 1 < grid.width; ++x) {
             grid.RemoveWalls(grid.grid[x, 0], grid.grid[x + 1, 0]);
@@ -109,6 +129,11 @@ public class MazeUtil {
         return grid;
     }
 
+    /// <summary>
+    /// Generate a maze with the Kruskal algorithm
+    /// </summary>
+    /// <param name="grid">The grid you want to generate the maze on</param>
+    /// <returns>The grid with the maze on it</returns>
     public static Grid GenerateKruskal(Grid grid) {
 
         HashSet<Wall> edges = CalculateInsideEdges(grid);

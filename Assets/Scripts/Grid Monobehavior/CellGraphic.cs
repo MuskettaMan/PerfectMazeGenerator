@@ -9,15 +9,14 @@ public class CellGraphic : MonoBehaviour {
     [SerializeField] private Transform[] walls;
     [SerializeField] private Sprite[] backgroundSprites;
     [SerializeField] private Sprite[] wallSprites;
-
-    /// <summary>
-    /// SpriteRenderer for the walls
-    /// </summary>
     [SerializeField] private Transform horiztonalWall;
     [SerializeField] private Transform verticalWall;
 
     private SpriteRenderer spriteRenderer;
 
+    /// <summary>
+    /// Set dependencies, get random walls and random floor sprite
+    /// </summary>
     private void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -28,6 +27,9 @@ public class CellGraphic : MonoBehaviour {
         spriteRenderer.sprite = backgroundSprites[Random.Range(0, backgroundSprites.Length)];
     }
 
+    /// <summary>
+    /// Keep the walls updated with their enabled state
+    /// </summary>
     private void Update() {
 
         for (int i = 0; i < cell.walls.Length; i++) {

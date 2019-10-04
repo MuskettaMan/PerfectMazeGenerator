@@ -18,11 +18,6 @@ public class Grid {
     public Cell[,] grid { get; private set; }
 
     /// <summary>
-    /// Utility object with maze algorithms
-    /// </summary>
-    public MazeUtil mazeUtil { get; private set; }
-
-    /// <summary>
     /// Array that stores all the available algorithms
     /// </summary>
     public MazeAlgorithm[] algorithms { get; private set; }
@@ -83,6 +78,9 @@ public class Grid {
         algorithms[(int)currentAlgorithm].Invoke(this);
     }
 
+    /// <summary>
+    /// Create all the cells and set their shared walls
+    /// </summary>
     private void ComputeCells() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
