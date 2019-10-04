@@ -34,9 +34,9 @@ TextureImporter:
     filterMode: 0
     aniso: -1
     mipBias: -100
-    wrapU: 1
-    wrapV: 1
-    wrapW: 1
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -107,7 +107,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures:
-    - texture: {fileID: 2800000, guid: 8878a782f4334ecbbcf683b3ac780966, type: 3}
+    - texture: {fileID: 2800000, guid: c49bd05e59486a74c890cd6c26863b18, type: 3}
       name: _NormalMap
   spritePackingTag: SpritePack
   pSDRemoveMatte: 0
