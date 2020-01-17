@@ -425,6 +425,7 @@ GameObject:
   - component: {fileID: 155999660}
   - component: {fileID: 155999664}
   - component: {fileID: 155999665}
+  - component: {fileID: 155999668}
   - component: {fileID: 155999666}
   - component: {fileID: 155999667}
   m_Layer: 0
@@ -508,7 +509,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 6
   m_Sprite: {fileID: 3785784146384260830, guid: 72b46e54e34b2ac4bb1b4477c01ef204,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -569,7 +570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalAxisName: Horizontal
   verticalAxisName: Vertical
-  movementSpeed: 3
+  character: {fileID: 155999668}
 --- !u!114 &155999666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,6 +597,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridManager: {fileID: 1269231046}
   gridGraphic: {fileID: 1269231044}
+--- !u!114 &155999668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155999659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69525bf225386942aad2b417748f63a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 3
 --- !u!1 &262220340
 GameObject:
   m_ObjectHideFlags: 0
