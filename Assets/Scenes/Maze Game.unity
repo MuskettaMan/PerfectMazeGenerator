@@ -130,7 +130,6 @@ GameObject:
   m_Component:
   - component: {fileID: 38503236}
   - component: {fileID: 38503237}
-  - component: {fileID: 38503238}
   m_Layer: 5
   m_Name: Toggle
   m_TagString: Untagged
@@ -204,22 +203,19 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1120578602}
+        m_MethodName: OnToggleChanged
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
---- !u!114 &38503238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 38503235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 012ae37291dc1544cbbe97664e96147c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objectA: {fileID: 910883621}
-  objectB: {fileID: 1120578599}
 --- !u!1 &108339571
 GameObject:
   m_ObjectHideFlags: 0
@@ -428,6 +424,7 @@ GameObject:
   - component: {fileID: 155999668}
   - component: {fileID: 155999666}
   - component: {fileID: 155999667}
+  - component: {fileID: 155999669}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -509,7 +506,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 15
   m_Sprite: {fileID: 3785784146384260830, guid: 72b46e54e34b2ac4bb1b4477c01ef204,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -610,6 +607,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 3
+--- !u!114 &155999669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155999659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 525313b84b897ad4c9edaa6b4b69e1ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &262220340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,7 +1448,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 754376238}
   m_CullTransparentMesh: 0
---- !u!1 &910883621
+--- !u!1 &809345418
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1447,61 +1456,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 910883623}
-  - component: {fileID: 910883622}
+  - component: {fileID: 809345420}
+  - component: {fileID: 809345419}
   m_Layer: 0
-  m_Name: Global Light 2D (1)
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &910883622
+  m_IsActive: 1
+--- !u!114 &809345419
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910883621}
+  m_GameObject: {fileID: 809345418}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Script: {fileID: 11500000, guid: e7466ae534e6ec2469044fc07a95884b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_LightType: 4
-  m_BlendStyleIndex: 0
-  m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 0.9030179, b: 0.759434, a: 1}
-  m_Intensity: 0.5
-  m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 00000000
-  m_LightCookieSprite: {fileID: 0}
-  m_UseNormalMap: 0
-  m_LightOrder: 0
-  m_AlphaBlendOnOverlap: 0
-  m_PointLightInnerAngle: 360
-  m_PointLightOuterAngle: 360
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
-  m_PointLightDistance: 3
-  m_PointLightQuality: 1
-  m_ShapeLightParametricSides: 5
-  m_ShapeLightParametricAngleOffset: 0
-  m_ShapeLightParametricRadius: 1
-  m_ShapeLightFalloffSize: 0.5
-  m_ShapeLightFalloffOffset: {x: 0, y: 0}
-  m_ShapePath:
-  - {x: -0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: -0.5, z: 0}
-  - {x: 0.5, y: 0.5, z: 0}
-  - {x: -0.5, y: 0.5, z: 0}
---- !u!4 &910883623
+  keyPrefab: {fileID: 3704787039980245321, guid: f0bb87adac7809a4193ad64d9b69dcf5,
+    type: 3}
+  amountOfKeysToSpawn: 3
+  keyCollector: {fileID: 155999669}
+--- !u!4 &809345420
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 910883621}
+  m_GameObject: {fileID: 809345418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -2065,6 +2051,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1120578601}
   - component: {fileID: 1120578600}
+  - component: {fileID: 1120578602}
   m_Layer: 0
   m_Name: Global Light 2D
   m_TagString: Untagged
@@ -2088,7 +2075,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 0.9030179, b: 0.759434, a: 1}
-  m_Intensity: 0.06
+  m_Intensity: 0.03
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
@@ -2125,6 +2112,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1120578602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120578599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33eaa9be0107c904b9caa84b9065ce4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  softIntensity: 0.03
+  hardIntensity: 0.5
 --- !u!1 &1214544151
 GameObject:
   m_ObjectHideFlags: 0
@@ -2172,6 +2173,7 @@ GameObject:
   - component: {fileID: 1269231045}
   - component: {fileID: 1269231046}
   - component: {fileID: 1269231044}
+  - component: {fileID: 1269231047}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -2194,6 +2196,7 @@ MonoBehaviour:
   padding: 0
   cellGraphicPrefab: {fileID: 3889352021081450586, guid: 74cc1ced76920154785b490618351c0a,
     type: 3}
+  doorGraphicPrefab: {fileID: 0}
   gridManager: {fileID: 1269231046}
 --- !u!4 &1269231045
 Transform:
@@ -2224,6 +2227,21 @@ MonoBehaviour:
   gridSize: {x: 5, y: 5}
   gridGraphic: {fileID: 1269231044}
   maxGridSize: 40
+--- !u!114 &1269231047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269231043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4271b919450061a429eb3126749258e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doorPrefab: {fileID: 5708611454355472351, guid: ed8e5c9b3e1d61944a662a73bfc999ee,
+    type: 3}
+  offset: {x: 0, y: 1.5}
 --- !u!1 &1280480911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2886,7 +2904,7 @@ GameObject:
   - component: {fileID: 1600666146}
   - component: {fileID: 1600666147}
   m_Layer: 0
-  m_Name: Sprite Light 2D
+  m_Name: Torch Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -42,7 +42,7 @@ public class CameraController : MonoBehaviour {
     /// Calculate the target size
     /// </summary>
     private void SetCameraSize() {
-        targetSize = (float)gridManager.GridSize.y / 2;
+        targetSize = (float)gridManager.GridSize.y / 2 + 1f;
         targetSize += gridGraphic.GetPadding() * gridManager.GridSize.y / 2;
         targetSize += padding;
     }

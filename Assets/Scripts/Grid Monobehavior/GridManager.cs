@@ -17,6 +17,13 @@ public class GridManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// Static instance for it self
+    /// </summary>
+    public static GridManager Instance {
+        get; set; 
+    }
+
+    /// <summary>
     /// Is called when the grid is resized and the amount is passed with it
     /// </summary>
     public Action<int> resizedGrid;
@@ -24,7 +31,7 @@ public class GridManager : MonoBehaviour {
     /// <summary>
     /// Whenever the grid gets generated
     /// </summary>
-    public Action gridGenerated;
+    public Action<Grid> gridGenerated;
 
     [SerializeField] private GridGraphic gridGraphic;
     [SerializeField] private int maxGridSize = 40;
@@ -35,7 +42,14 @@ public class GridManager : MonoBehaviour {
 
     private void Start() {
         grid = new Grid(gridSize.x, gridSize.y, MazeType.DepthFirst);
-        gridGenerated?.Invoke();
+        gridGraphic.Display();
+        gridGenerated?.Invoke(grid);
+    }
+
+    private void OnEnable() {
+        if(Instance == null) {
+            Instance = this;
+        }
     }
 
     /// <summary>
@@ -52,8 +66,9 @@ public class GridManager : MonoBehaviour {
     /// </summary>
     public void Reset() {
         grid.Reset();
+        gridGraphic.Display();
         grid.algorithms[(int)grid.currentAlgorithm].Invoke(grid);
-        gridGenerated?.Invoke();
+        gridGenerated?.Invoke(grid);
     }
 
     /// <summary>
@@ -61,14 +76,22 @@ public class GridManager : MonoBehaviour {
     /// </summary>
     /// <param name="amount">With how much you want to resize</param>
     public void ResizeGrid(int amount) {
-        if (gridSize.x + amount < 2 || gridSize.y + amount < 2 || gridSize.x + amount > maxGridSize || gridSize.y + amount > maxGridSize) {
+        if (gridSize.x + amount < 5 || gridSize.y + amount < 5 || gridSize.x + amount > maxGridSize || gridSize.y + amount > maxGridSize) {
             return;
         }
 
         grid.ResizeGrid(gridSize.x += amount, gridSize.y += amount);
         gridGraphic.Display();
-        gridGenerated?.Invoke();
+        gridGenerated?.Invoke(grid);
         resizedGrid?.Invoke(amount);
+    }
+
+    /// <summary>
+    /// Returns the class responsible for the gameobjects that are displaying the grid
+    /// </summary>
+    /// <returns></returns>
+    public GridGraphic GetGridGraphic() {
+        return gridGraphic;
     }
 
 }

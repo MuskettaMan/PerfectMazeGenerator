@@ -9,6 +9,9 @@ public class CellGraphic : MonoBehaviour {
     [SerializeField] private Transform[] walls;
     [SerializeField] private Sprite[] backgroundSprites;
     [SerializeField] private Sprite[] wallSprites;
+    [SerializeField] private Sprite[] midWallSprites;
+    [SerializeField] private Transform midWall;
+    [SerializeField] private Transform[] midWallWalls;
     [SerializeField] private Transform horiztonalWall;
     [SerializeField] private Transform verticalWall;
 
@@ -24,7 +27,23 @@ public class CellGraphic : MonoBehaviour {
             wall.GetComponent<SpriteRenderer>().sprite = wallSprites[Random.Range(0, wallSprites.Length)];
         }
 
+        if(cell.y == GridManager.Instance.GridSize.y - 1) {
+            midWall.GetComponent<SpriteRenderer>().sprite = midWallSprites[Random.Range(0, midWallSprites.Length)];
+            midWall.gameObject.SetActive(true);
+            walls[(int)Walls.Top].position += new Vector3(0, 1, 0);
+
+            if (cell.x == 0) {
+                midWallWalls[1].gameObject.SetActive(true);
+            } else if (cell.x == GridManager.Instance.GridSize.x - 1) {
+                midWallWalls[0].gameObject.SetActive(true);
+            }
+
+            
+        }
+
         spriteRenderer.sprite = backgroundSprites[Random.Range(0, backgroundSprites.Length)];
+
+        
     }
 
     /// <summary>

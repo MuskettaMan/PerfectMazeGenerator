@@ -9,6 +9,7 @@ public class GridGraphic : MonoBehaviour {
     /// </summary>
     [SerializeField] private float padding = 0.0f;
     [SerializeField] private CellGraphic cellGraphicPrefab;
+    [SerializeField] private DoorView doorGraphicPrefab;
     [SerializeField] private GridManager gridManager;
 
     private Grid grid;
@@ -17,8 +18,6 @@ public class GridGraphic : MonoBehaviour {
 
     private void Start() {
         grid = gridManager.grid;
-
-        Display();
     }
 
     /// <summary>

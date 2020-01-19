@@ -11,13 +11,13 @@ public class PlayerSpawner : MonoBehaviour {
     /// Set dependencies
     /// </summary>
     private void Start() {
-        gridManager.gridGenerated += OnMazeGenerated;
+        gridManager.gridGenerated += OnGridGenerated;
     }
 
     /// <summary>
     /// Plot the player when the maze is generated
     /// </summary>
-    private void OnMazeGenerated() {
+    private void OnGridGenerated(Grid grid) {
         StartCoroutine(PlotPlayer());
     }
 
