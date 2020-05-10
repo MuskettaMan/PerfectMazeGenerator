@@ -12,7 +12,7 @@ public class DoorView : MonoBehaviour {
     [SerializeField] private Sprite OpenedSprite;
     [SerializeField] private Sprite ClosedSprite;
 
-    private void Start() {
+    private void Start() { 
         doorModel = GetComponent<DoorModel>();
         doorController = GetComponent<DoorController>();
 

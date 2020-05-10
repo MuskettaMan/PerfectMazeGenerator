@@ -17,7 +17,7 @@ public class DoorModel : MonoBehaviour {
         }
     }
 
-    [SerializeField] private int keyAmountNeeded;
+    [HideInInspector] public int keyAmountNeeded;
 
     public Action DoorOpened;
     public Action DoorClosed;
@@ -37,6 +37,10 @@ public class DoorModel : MonoBehaviour {
 
     public int GetKeyAmountNeeded() {
         return keyAmountNeeded;
+    }
+
+    public void NextLevel() {
+        GridManager.Instance.ResizeGrid(1);
     }
 
 }

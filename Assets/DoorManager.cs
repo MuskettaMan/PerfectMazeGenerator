@@ -5,13 +5,16 @@ using UnityEngine;
 public class DoorManager : MonoBehaviour {
 
     [SerializeField] private GameObject doorPrefab;
+    private GameManager gameManager;
     private GridManager gridManager;
 
     private GameObject doorInstance;
+    private DoorController doorController;
     [SerializeField] private Vector2 offset;
 
     private void Start() {
         gridManager = GridManager.Instance;
+        gameManager = FindObjectOfType<GameManager>();
 
         gridManager.gridGenerated += OnGridGenerated;
     }
@@ -25,10 +28,13 @@ public class DoorManager : MonoBehaviour {
 
         if(!doorInstance) {
             doorInstance = Instantiate(doorPrefab, transform);
+            doorController = doorInstance.GetComponent<DoorController>();
             doorInstance.SetActive(false);
         }
 
         doorInstance.transform.position = pos + (Vector3)offset;
+        doorInstance.GetComponent<DoorModel>().keyAmountNeeded = gameManager.GetTotalKeys();
+        doorController.CloseDoor();
         doorInstance.SetActive(true);
     }
 

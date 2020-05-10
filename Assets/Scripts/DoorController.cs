@@ -7,9 +7,11 @@ public class DoorController : MonoBehaviour {
     private DoorView doorView;
     private DoorModel doorModel;
 
-    private void Start() {
+    private void Awake() {
         doorView = GetComponent<DoorView>();
         doorModel = GetComponent<DoorModel>();
+
+        doorModel.DoorOpened += OnDoorOpened;
     }
 
     public void OpenDoor(KeyCollector keyCollector) {
@@ -22,6 +24,15 @@ public class DoorController : MonoBehaviour {
         if(doorModel.IsOpened) {
             doorModel.CloseDoor();
         }
+    }
+
+    private IEnumerator WaitForNextLevel() {
+        yield return new WaitForSeconds(.25f);
+        doorModel.NextLevel();
+    }
+
+    private void OnDoorOpened() {
+        StartCoroutine(WaitForNextLevel());
     }
 
 }

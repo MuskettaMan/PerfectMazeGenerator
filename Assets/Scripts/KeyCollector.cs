@@ -5,9 +5,14 @@ using System;
 
 public class KeyCollector : MonoBehaviour {
 
-    private int keyAmount = 0; // Implement finding keys and adding them to your total
+    private int keyAmount = 0;
 
     public Action<Key> keyPickedUp;
+    public Action<int> keyAmountChanged;
+
+    private void Start() {
+        GridManager.Instance.gridGenerated += OnGridGenerated;
+    }
 
     public int KeyAmount {
         get {
@@ -24,9 +29,15 @@ public class KeyCollector : MonoBehaviour {
         
         if(collision.gameObject.TryGetComponent(out key)) {
             keyAmount += (int)key.type;
+            keyAmountChanged?.Invoke(keyAmount);
 
             keyPickedUp?.Invoke(key);
         }
+    }
+
+    private void OnGridGenerated(Grid grid) {
+        keyAmount = 0;
+        keyAmountChanged?.Invoke(keyAmount);
     }
 
 }
