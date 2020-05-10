@@ -35,6 +35,7 @@ public class GridManager : MonoBehaviour {
 
     [SerializeField] private GridGraphic gridGraphic;
     [SerializeField] private int maxGridSize = 40;
+    [SerializeField] private DoorManager doorManager;
 
     public Grid grid {
         get; private set;
@@ -44,6 +45,8 @@ public class GridManager : MonoBehaviour {
         grid = new Grid(gridSize.x, gridSize.y, MazeType.DepthFirst);
         gridGraphic.Display();
         gridGenerated?.Invoke(grid);
+
+        doorManager.Door.Opened += OnDoorOpened;
     }
 
     private void OnEnable() {
@@ -94,4 +97,12 @@ public class GridManager : MonoBehaviour {
         return gridGraphic;
     }
 
+    /// <summary>
+    /// When the door gets opened increase the grid size
+    /// </summary>
+    private void OnDoorOpened()
+    {
+        ResizeGrid(1);
+        doorManager.Door.CloseDoor();
+    }
 }

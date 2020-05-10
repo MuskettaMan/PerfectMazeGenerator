@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class DoorManager : MonoBehaviour {
 
-    [SerializeField] private GameObject doorPrefab;
+    [SerializeField] private DoorModel doorPrefab;
     private GridManager gridManager;
 
-    private GameObject doorInstance;
+    private DoorModel doorInstance;
     [SerializeField] private Vector2 offset;
+
+    public DoorModel Door => doorInstance;
 
     private void Start() {
         gridManager = GridManager.Instance;
@@ -25,11 +27,11 @@ public class DoorManager : MonoBehaviour {
 
         if(!doorInstance) {
             doorInstance = Instantiate(doorPrefab, transform);
-            doorInstance.SetActive(false);
+            doorInstance.gameObject.SetActive(false);
         }
 
         doorInstance.transform.position = pos + (Vector3)offset;
-        doorInstance.SetActive(true);
+        doorInstance.gameObject.SetActive(true);
     }
 
 }

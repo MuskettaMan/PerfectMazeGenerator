@@ -5,38 +5,49 @@ using System;
 
 public class DoorModel : MonoBehaviour {
 
-    private bool isOpened = false;
+    /// <summary>
+    /// Whether the door is open or not
+    /// </summary>
+    public bool IsOpened { get; set; }
 
-    public bool IsOpened {
-        get {
-            return isOpened;
-        }
+    [SerializeField, Tooltip("The amount of keys needed to open the door")] 
+    private int keyAmountNeeded;
 
-        private set {
-            isOpened = value;
-        }
-    }
+    /// <summary>
+    /// The amount of keys needed to open the door
+    /// </summary>
+    public int KeyAmountNeeded => keyAmountNeeded;
 
-    [SerializeField] private int keyAmountNeeded;
+    /// <summary>
+    /// Gets called when the door gets opened
+    /// </summary>
+    public event Action Opened;
 
-    public Action DoorOpened;
-    public Action DoorClosed;
+    /// <summary>
+    /// Gets called when the door gets closed
+    /// </summary>
+    public event Action Closed;
 
-    public void OpenDoor(KeyCollector collecter) {
-        if (collecter.KeyAmount >= keyAmountNeeded) {
-            DoorOpened?.Invoke();
+    /// <summary>
+    /// Checks the if the current key collector has enough keys. If yes, then it opens the door
+    /// </summary>
+    /// <param name="collecter"></param>
+    public void TryOpenDoor(KeyCollector collecter) 
+    {
+        if (collecter.KeyAmount >= keyAmountNeeded) 
+        {
+            Opened?.Invoke();
             IsOpened = true;
         }
-        
     }
 
-    public void CloseDoor() {
-        DoorClosed?.Invoke();
+    /// <summary>
+    /// Closes the door
+    /// </summary>
+    public void CloseDoor() 
+    {
+        Closed?.Invoke();
         IsOpened = false;
-    }
-
-    public int GetKeyAmountNeeded() {
-        return keyAmountNeeded;
     }
 
 }
