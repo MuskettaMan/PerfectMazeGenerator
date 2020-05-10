@@ -16,7 +16,7 @@ public class DoorController : MonoBehaviour {
 
     public void OpenDoor(KeyCollector keyCollector) {
         if (!doorModel.IsOpened) {
-            doorModel.OpenDoor(keyCollector);
+            doorModel.TryOpenDoor(keyCollector);
         }
     }
 

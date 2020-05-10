@@ -82,6 +82,8 @@ public class CameraController : MonoBehaviour {
         targetSize = (float)gridManager.GridSize.y / 2 + 1f;
         targetSize += gridGraphic.GetPadding() * gridManager.GridSize.y / 2;
         targetSize += padding;
+        LeanTween.cancel(camera.gameObject);
+        LeanTween.value(camera.gameObject, (float val) => camera.orthographicSize = val, camera.orthographicSize, targetSize, 0.4f).setEase(LeanTweenType.easeInOutSine);
     }
 
     /// <summary>

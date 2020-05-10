@@ -16,8 +16,8 @@ public class DoorView : MonoBehaviour {
         doorModel = GetComponent<DoorModel>();
         doorController = GetComponent<DoorController>();
 
-        doorModel.DoorOpened += OnDoorOpened;
-        doorModel.DoorClosed += OnDoorClosed;
+        doorModel.Opened += OnDoorOpened;
+        doorModel.Closed += OnDoorClosed;
     }
 
     private void OnDoorOpened() {
