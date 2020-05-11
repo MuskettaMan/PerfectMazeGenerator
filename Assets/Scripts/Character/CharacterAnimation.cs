@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class CharacterAnimation : MonoBehaviour {
 
+    /// <summary>
+    /// Reference to the animator
+    /// </summary>
     private Animator animator;
+
+    /// <summary>
+    /// Reference to the player controller
+    /// </summary>
     private CharacterController playerController;
 
     /// <summary>

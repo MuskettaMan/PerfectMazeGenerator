@@ -11,6 +11,9 @@ public class CharacterController : MonoBehaviour {
     /// </summary>
     private Vector2 dir;
 
+    /// <summary>
+    /// Reference to the rigidbody
+    /// </summary>
     private Rigidbody2D rb2d;
 
     /// <summary>

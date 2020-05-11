@@ -7,11 +7,24 @@ public class GridGraphic : MonoBehaviour {
     /// <summary>
     /// Distance between cells
     /// </summary>
-    [SerializeField] private float padding = 0.0f;
-    [SerializeField] private CellGraphic cellGraphicPrefab;
-    [SerializeField] private DoorView doorGraphicPrefab;
-    [SerializeField] private GridManager gridManager;
+    [SerializeField] 
+    private float padding = 0.0f;
 
+    /// <summary>
+    /// Prefab of the cell graphic
+    /// </summary>
+    [SerializeField] 
+    private CellGraphic cellGraphicPrefab;
+
+    /// <summary>
+    /// Reference to the grid manager
+    /// </summary>
+    [SerializeField] 
+    private GridManager gridManager;
+
+    /// <summary>
+    /// The grid
+    /// </summary>
     private Grid grid;
     private CellGraphic[,] objects;
     private Vector2Int gridSize;

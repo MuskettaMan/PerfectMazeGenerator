@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour {
@@ -102,7 +103,12 @@ public class GridManager : MonoBehaviour {
     /// </summary>
     private void OnDoorOpened()
     {
+        StartCoroutine(WaitForNextLevel());
+    }
+
+    private IEnumerator WaitForNextLevel()
+    {
+        yield return new WaitForSeconds(0.5f);
         ResizeGrid(1);
-        doorManager.Door.CloseDoor();
     }
 }

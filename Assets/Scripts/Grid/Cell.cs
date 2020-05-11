@@ -14,6 +14,9 @@
     /// </summary>
     public bool visited;
 
+    /// <summary>
+    /// Array that contains all the walls
+    /// </summary>
     public Wall[] walls;
 
     /// <summary>

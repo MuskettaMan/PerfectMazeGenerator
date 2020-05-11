@@ -1,22 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
+/// <summary>
+/// Controls how the camera moves and zooms
+/// </summary>
 public class CameraController : MonoBehaviour {
 
-    public enum CameraFollowType { Grid, Player }
+    /// <summary>
+    /// Reference to the gridmanager
+    /// </summary>
+    [SerializeField] 
+    private GridManager gridManager;
 
-    [SerializeField] private GridManager gridManager;
-    [SerializeField] private GridGraphic gridGraphic;
-    [SerializeField] private Transform player;
-    [SerializeField] private float playerFollowCameraSize;
-    [SerializeField] private CameraFollowType cameraFollowType;
+    /// <summary>
+    /// Reference to the grid graphic
+    /// </summary>
+    [SerializeField] 
+    private GridGraphic gridGraphic;
 
+    /// <summary>
+    /// Reference to the player
+    /// </summary>
+    [SerializeField] 
+    private Transform player;
+
+    /// <summary>
+    /// Reference to the camera
+    /// </summary>
     private new Camera camera;
-    private Vector3 targetPosition;
-    private Vector3 startPos;
-
-    private bool switchType = true;
 
     /// <summary>
     /// The target size you want the camera to go to
@@ -26,77 +39,40 @@ public class CameraController : MonoBehaviour {
     /// <summary>
     /// Speed you want the camera to move
     /// </summary>
-    [SerializeField] private float speed = 5f;
+    [SerializeField] private float speed = 0.5f;
 
     /// <summary>
     /// Padding from the edge of the screen
     /// </summary>
     [SerializeField] private float padding = 1f;
 
-    private delegate void CameraFunction();
-    private Dictionary<CameraFollowType, CameraFunction> CameraFollowPairs = new Dictionary<CameraFollowType, CameraFunction>();
-
     private void Start() {
         camera = GetComponent<Camera>();
         gridManager.resizedGrid += OnGridResized;
 
-        startPos = transform.position;
-
-        CameraFollowPairs.Add(CameraFollowType.Grid, SetCameraGrid);
-        CameraFollowPairs.Add(CameraFollowType.Player, SetCameraPlayer);
+        UpdateCamera();
     }
 
     /// <summary>
-    /// Ease the camera into the target size
+    /// Updates the camera to fit grid size
+    /// And animates it to the new size
     /// </summary>
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.F)) {
-            switchType = !switchType;
-        }
-        cameraFollowType = switchType ? CameraFollowType.Grid : CameraFollowType.Player;
-        
-        CameraFollowPairs[cameraFollowType].Invoke();
-
-        var newSize = Mathf.Lerp(camera.orthographicSize, targetSize, Time.deltaTime * speed);
-        var newPosition = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
-
-        UpdateCamera(newSize, newPosition);
-    }
-
-    /// <summary>
-    /// Update camera settings
-    /// </summary>
-    /// <param name="cameraSize">The new orthographic size of the camera</param>
-    /// <param name="position">The new position of the camera</param>
-    private void UpdateCamera(float cameraSize, Vector3 position) {
-        transform.position = position;
-        camera.orthographicSize = cameraSize;
-    }
-    
-    /// <summary>
-    /// Update parameters for grid view
-    /// </summary>
-    private void SetCameraGrid() {
-        targetPosition = startPos;
-
+    private void UpdateCamera() {
         targetSize = (float)gridManager.GridSize.y / 2 + 1f;
         targetSize += gridGraphic.GetPadding() * gridManager.GridSize.y / 2;
         targetSize += padding;
-        LeanTween.cancel(camera.gameObject);
-        LeanTween.value(camera.gameObject, (float val) => camera.orthographicSize = val, camera.orthographicSize, targetSize, 0.4f).setEase(LeanTweenType.easeInOutSine);
+
+        LeanTween.value(camera.gameObject, (float val) => {
+            camera.orthographicSize = val;
+        }, camera.orthographicSize, targetSize, speed).setEase(LeanTweenType.easeInOutSine);
     }
 
     /// <summary>
-    /// Update parameters for player view
+    /// Gets called when the grid resizes
     /// </summary>
-    private void SetCameraPlayer() {
-        targetPosition = player.position;
-        targetPosition.z = startPos.z;
-        targetSize = playerFollowCameraSize;
-    }
-
+    /// <param name="amount">By how much the grid is resized</param>
     private void OnGridResized(int amount) {
-        
+        UpdateCamera();
     }
 
 }

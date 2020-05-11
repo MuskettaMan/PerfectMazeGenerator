@@ -4,17 +4,62 @@ using UnityEngine;
 
 public class CellGraphic : MonoBehaviour {
 
+    /// <summary>
+    /// Reference to its cell
+    /// </summary>
     public Cell cell;
 
-    [SerializeField] private Transform[] walls;
-    [SerializeField] private Sprite[] backgroundSprites;
-    [SerializeField] private Sprite[] wallSprites;
-    [SerializeField] private Sprite[] midWallSprites;
-    [SerializeField] private Transform midWall;
-    [SerializeField] private Transform[] midWallWalls;
-    [SerializeField] private Transform horiztonalWall;
-    [SerializeField] private Transform verticalWall;
+    /// <summary>
+    /// Reference to transform of the walls
+    /// </summary>
+    [SerializeField] 
+    private Transform[] walls;
 
+    /// <summary>
+    /// The different possible background sprites
+    /// </summary>
+    [SerializeField] 
+    private Sprite[] backgroundSprites;
+
+    /// <summary>
+    /// The different wall sprites
+    /// </summary>
+    [SerializeField] 
+    private Sprite[] wallSprites;
+
+    /// <summary>
+    /// The different mid wall sprites
+    /// </summary>
+    [SerializeField] 
+    private Sprite[] midWallSprites;
+
+    /// <summary>
+    /// Reference to the transform of the mid wall
+    /// </summary>
+    [SerializeField] 
+    private Transform midWall;
+
+    /// <summary>
+    /// Walls of the mid wall
+    /// </summary>
+    [SerializeField] 
+    private Transform[] midWallWalls;
+
+    /// <summary>
+    /// Prefab of the horizontal wall
+    /// </summary>
+    [SerializeField] 
+    private Transform horiztonalWall;
+
+    /// <summary>
+    /// Prefab of the vertical wall
+    /// </summary>
+    [SerializeField] 
+    private Transform verticalWall;
+
+    /// <summary>
+    /// Reference to the sprite renderer
+    /// </summary>
     private SpriteRenderer spriteRenderer;
 
     /// <summary>
